@@ -1,0 +1,168 @@
+<html>
+    <head>
+        
+        <style>
+            *
+            
+            {
+                margin: 0px;
+                padding: 0px;
+                
+            }
+            #div4
+            {
+                
+            
+                 
+               position: relative;
+                top:80px;
+                padding-top: 5px;
+                padding-bottom: 10px;
+                padding-right: auto;
+                background-color: whitesmoke;
+                    
+                
+                color:blue;
+                border:inset;
+            }
+     
+
+
+#div9
+{
+    margin:absolute;
+    padding-top: 0px;
+    background-color:whitesmoke;
+    border:inset;
+    border-bottom-color:black;
+   
+    
+}
+th{
+    border-collapse: collapse;
+   color: black;
+  }
+            
+            
+            </style>
+    </head>
+    <body>
+        <form action="VerifyMail" method="get">
+        <div id="div4">        
+                
+                <%! Connection conn=null;
+
+
+
+                %>
+            <%
+               
+                if(session.isNew())
+                {
+               response.sendRedirect("Login.html");
+                 }
+                else
+                {
+                    conn=null;
+                     
+            try
+		 {
+			  Class.forName("oracle.jdbc.driver.OracleDriver");
+			 
+                     conn= DriverManager.getConnection("jdbc:oracle:thin:@PIYUSH :1521:xe","system","piyush30");
+                          
+                          
+                          
+                                                
+                      
+			 
+		 }
+		 catch(Exception e)
+		 
+		 {
+			 
+			 System.out.println("some exception occured" +e);
+			 ServletException obj=new ServletException(e.getMessage());
+			 throw obj;
+		
+		 }
+                
+         
+         
+         try
+         {
+            
+             Statement st= conn.createStatement();
+             
+	 ResultSet rs= st.executeQuery("select * from VoterRegistration3" );
+         
+        
+        out.println("<div>");
+        out.println("<table style=text-align:center ; width=100%;border='1' cellspacing='10' cellpadding='30'>");
+        out.println("<tr><th></th><th><h3>Name</th><th>Father's Name</th><th>User ID </th> <th> Mobile No.</th><th>Email id</th><th>VoterId No.</th><th>DOB</th><th>DOR</th><th>City</th><th> address</th></tr>");
+         
+         while(rs.next())
+	 {
+		 String nm=rs.getString(1);
+		String fn =rs.getString(2);
+		 String ui=rs.getString(3);
+                 String mn=rs.getString(4);
+                 String em=rs.getString(5);
+                 String vi=rs.getString(6);
+                 Date dt=rs.getDate(7);
+                  Date dt1=rs.getDate(8);
+                 String ct=rs.getString(9);
+                  String ad=rs.getString(10);
+                   SimpleDateFormat sdf=new SimpleDateFormat ("dd/MMM/yyyy EEE");
+                  String str=sdf.format(dt);
+                  String str1=sdf.format(dt1);
+                  
+             
+              
+              String t="input type = 'checkbox' name = "+em+"";
+              
+		out.println("<tr><td><"+t+"></td><td>"+nm+"</td><td>"+fn+" </td><td>"+ui+"</td><td>"+mn+"</td><td>"+em+"</td><td>"+vi+"</td><td>"+str+"</td><td>"+str1+"</td><td>"+ct+"</td><td>"+ad+"</td></tr><br>");
+            
+               
+                
+                   
+                
+                
+	 
+                   
+         }
+         
+         
+         
+         out.println("</div>");
+         }
+                catch(SQLException ex2)
+ {
+	 
+	 System.out.println("SQL Error :"+ex2);
+ }
+                }
+             %>
+             <input type='submit'>
+        </form>
+             <form action="Logout.jsp">          
+   <select name="Type" >
+    <option> V VOTER</option>
+     <option> NV VOTER</option>
+    
+    <option> V CANDIDATE</option>
+     <option> NV CANDIDATE</option>
+    <input type="submit">
+</select>
+             
+             </form>     
+          
+            
+      
+        </form>
+        
+        
+     </div>
+            
+    </body>
+</html>

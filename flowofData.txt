@@ -1,0 +1,74 @@
+ --- Flow Of Data---
+useradminreg.html->registdata.php
+registdata.php->//insert($emailid and $password) into
+Database name(loginvoter)//
+
+candpersonalinfo.html->candregisdata.php
+candregisdata.php->//inse ($emailid and $password) into 
+Database name(logincand)//
+
+loginvua.html((emailid,password)-OTER,CANDIDATE,ADMIN)->loginvoterdata.php
+
+ loginvoterdata.php->
+type select goes into there database-
+voter->loginvoter
+pages is ->logintest.php
+CANDIDATE->logincand
+page is->logintestc
+Admin->loginadmin
+page is->logintesta.php
+---####-----
+!!!VOTER FOR UPDATA!!!!(working on emailid and session)-->logintest.php(session and ajax used to bring data of viewprof and editprof)->(viewprof.php and editprof.php) and again we have use sql query for showing (photo and name )
+In editprof.php(data gone to)->regupdatedata.php(for updatedata)
+
+####### Page direction in short ##########
+(loginvua.html->loginvoterdata.php->logintest.php->(viewprof.php,editprof->(regupdatedata.php)))
+####### End #########
+
+-----#######-----------------
+
+!!!CADIDATE FOR UPDATE!!!(working on emailid and session)-->logintestc.php(session and ajax used to bring data of viewcandprof and editcandprof)->(candviewprof.php and editcandprof.php) and again we have use sql query for showing(photo and name)
+In editcandprof.php(data gose to)->candupdatedata.php
+
+####### Page direction in short ###############
+(loginvua.html->loginvoterdata.php->logintestc.php-> (candviewprof.php,editcandprof.php(candupdatedata.php)))
+
+####### End #############
+ADMIN loginvua.html->loginvoterdata.php->logintesta.php->(votervd.php and candidatevd.php)
+
+!!!(VOTERVD)!!!loginvua.html->loginvoterdata.php->logintesta.php->votervd.php(ajax)->viewv.php(from viewv.php we are taking status from registration table and class="getcheckbox")
+!!!!####view voter shortcut###!!!!
+
+!!!!!##END##!!!
+
+!!!deleteing voter!!!!->((delevoter.php)(we are checking regid and emailid is correct then delete that emailid whose regid is this)) and from ((deletev.php) we are taking getreg that's ['reg_id'] and button [getbutton] )
+///IN VOTER DELETE We are working on a regid and delete button///
+!!!###delete voter shortcut######!!!!
+(loginvua.html->loginvoterdata.php->logintesta.php->votervd.php<-deletevoter.php(check)<-deletev.php)
+!!!##### END ##########!!!!!
+
+!!!(CANDIDATEVD)for view!!!loginvua.html->loginvoterdata.php->logintesta.php->candidatevd.php(ajax)<-(we are take status and )<-viewc.php
+working is left
+!!!!###Candidateview shortcut###!!!!
+!!!!###END###!!! 
+
+!!!(Deletecandidate) for delete!!!loginvua.html->loginvoterdata.php->logintesta.php->candidatevd.php<-deletecand.php (we are taking candreg_id and delete query is written)<-deletec.php(we are taking( getcandreg[candreg_id] and "getbutton") through class) getbutton for delete ) 
+///IN DELETE We are working on regid and delete button///
+!!!!###deletecand shortcut###!!!
+loginvoter.html->loginvoterdata.php->logintesta.php->candidatevd.php<-deletecand.php<-deletec.php
+!!!!####END###!!!!
+
+
+LOGOUT-> (we are using session_start(),taking emailid and unset sion for emailid and session destory it and we are using header
+to location at home.php)
+
+FOR CASTE VOTE ->
+-First u have to login by entering(emailid and password)->logintest.php (page will open in that) 
+->CASTE Vote Button (we see click on it )->casev.php (page will open) 
+~~###(IN casev.php we are checking (isset($_POST['submit']) and we take party then we conn to database then we use select query in that we count the vote and then we have use update query for updating count )
+###~~~~
+~~###FOR RESULT VOTE->(resultvote.php)
+-(we connect to database  then select query we use  then check result is not less then 1
+we have use table,party and count befor while so that again party and count doesn't print only vote count again an again  )
+###~~~
+votervd.php->viewv.php,deletevoter.php,deletevoter.php(to show viewc.php file again)
